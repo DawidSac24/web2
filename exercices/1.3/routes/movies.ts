@@ -9,10 +9,10 @@ const jsonDbPath = path.join(__dirname, "/../data/movies.json");
 
 const defaultMovies: Movie[] = [
   {
-      id: 1,
-      title: "Fight Club",
-      director: "David Fincher",
-      duration: 139,
+    id: 1,
+    title: "Fight Club",
+    director: "David Fincher",
+    duration: 139,
   },
   {
     id: 2,
@@ -29,13 +29,32 @@ const defaultMovies: Movie[] = [
 ];
 
 router.get("/", (req: Request, res: Response) => {
-    if (req.query.order && typeof req.query.order !== "string") {
-    return res.sendStatus(400);
+  const minimumDuration = Number(req.query["minimum-duration"]);
+  console.log("Query received:", req.query);
+
+  const movies: Movie[] = parse(jsonDbPath, defaultMovies);
+
+  // Vérifie si minimumDuration est un nombre valide
+  if (!isNaN(minimumDuration)) {
+    const filteredMovies = movies.filter((movie) => movie.duration >= minimumDuration);
+    return res.json(filteredMovies);
   }
 
-  const movies = parse(jsonDbPath, defaultMovies);
-
+  // Si aucun filtre ou filtre invalide, retourne tous les films
   return res.json(movies);
+});
+
+router.get("/:id", (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+
+  const movies: Movie[] = parse(jsonDbPath, defaultMovies);
+  const movie: Movie | undefined = movies.find((movie) => movie.id === id);
+
+  if (!movie) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(movie);
 });
 
 export default router;

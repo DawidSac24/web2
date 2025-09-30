@@ -12,11 +12,11 @@ app.use(express.urlencoded({ extended: false }));
 let getReqCounter = 0;
 
 app.use((_req, _res, next) => {
-    if (_req.method == 'GET') {
-        getReqCounter++;
-    }
-    console.log("GET counter : " + getReqCounter);
-    next();
+  if (_req.method == 'GET') {
+    getReqCounter++;
+  }
+  console.log("GET counter : " + getReqCounter);
+  next();
 });
 
 app.use("/users", usersRouter);

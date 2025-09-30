@@ -1,4 +1,4 @@
 @baseUrl = http://localhost:3000\
 
 ###
-GET {{baseUrl}}/movies
+GET {{baseUrl}}/movies HTTP/1.1
