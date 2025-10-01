@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 
 import path from "node:path";
-import { Movie } from "../types";
+import { Movie, NewMovie } from "../types";
 import { parse } from "../utils/json";
 const router = Router();
 
@@ -53,6 +53,60 @@ router.get("/:id", (req: Request, res: Response) => {
   if (!movie) {
     return res.sendStatus(404);
   }
+
+  return res.json(movie);
+});
+
+function isValidNewMovie(body: unknown): body is NewMovie {
+  return (
+    typeof body === "object" &&
+    body !== null  && 
+    "title" in body &&
+    "director" in body &&
+    "duration" in body &&
+    typeof (body as any).title === "string" &&
+    typeof (body as any).director === "string" &&
+    typeof (body as any).duration === "number" &&
+    (body as any).duration > 0
+  );
+}
+
+router.post("/", (req: Request, res: Response) => {
+  const body: unknown = req.body;
+
+  if (!isValidNewMovie(body)) {
+    return res.sendStatus(400);
+  }
+  const { title, director, duration, budget, description, imageUrl } = body as NewMovie;
+
+  const movies: Movie[] = parse(jsonDbPath, defaultMovies);
+  const nextId = movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) + 1;
+
+  const newMovie: Movie = {
+    id: nextId,
+    title,
+    director,
+    duration,
+    budget,
+    description,
+    imageUrl
+  };
+
+  movies.push(newMovie);
+  return res.json(newMovie);
+});
+
+router.delete("/:id", (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+
+  const movies: Movie[] = parse(jsonDbPath, defaultMovies);
+  const movie: Movie | undefined = movies.find((movie) => movie.id === id);
+
+  if (!movie) {
+    return res.sendStatus(404);
+  }
+
+  movies.slice(movie.id)
 
   return res.json(movie);
 });
