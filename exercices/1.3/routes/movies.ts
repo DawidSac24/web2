@@ -1,8 +1,9 @@
 import { Router, Request, Response } from "express";
 
 import path from "node:path";
-import { Movie, NewMovie } from "../types";
+import { Movie } from "../types";
 import { parse } from "../utils/json";
+import { isNewMovie } from "../utils/type-guards";
 const router = Router();
 
 const jsonDbPath = path.join(__dirname, "/../data/movies.json");
@@ -24,7 +25,7 @@ const defaultMovies: Movie[] = [
     id: 3,
     title: "Taxi Driver",
     director: "martin Scorese",
-    duration: 114
+    duration: 114,
   },
 ];
 
@@ -36,7 +37,9 @@ router.get("/", (req: Request, res: Response) => {
 
   // Vérifie si minimumDuration est un nombre valide
   if (!isNaN(minimumDuration)) {
-    const filteredMovies = movies.filter((movie) => movie.duration >= minimumDuration);
+    const filteredMovies = movies.filter(
+      (movie) => movie.duration >= minimumDuration,
+    );
     return res.json(filteredMovies);
   }
 
@@ -57,30 +60,21 @@ router.get("/:id", (req: Request, res: Response) => {
   return res.json(movie);
 });
 
-function isValidNewMovie(body: unknown): body is NewMovie {
-  return (
-    typeof body === "object" &&
-    body !== null  && 
-    "title" in body &&
-    "director" in body &&
-    "duration" in body &&
-    typeof (body as any).title === "string" &&
-    typeof (body as any).director === "string" &&
-    typeof (body as any).duration === "number" &&
-    (body as any).duration > 0
-  );
-}
+
 
 router.post("/", (req: Request, res: Response) => {
   const body: unknown = req.body;
 
-  if (!isValidNewMovie(body)) {
+  if (!isNewMovie(body)) {
     return res.sendStatus(400);
   }
-  const { title, director, duration, budget, description, imageUrl } = body as NewMovie;
+  const { title, director, duration, budget, description, imageUrl } =
+    body;
 
   const movies: Movie[] = parse(jsonDbPath, defaultMovies);
-  const nextId = movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) + 1;
+  const nextId =
+    movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) +
+    1;
 
   const newMovie: Movie = {
     id: nextId,
@@ -89,7 +83,7 @@ router.post("/", (req: Request, res: Response) => {
     duration,
     budget,
     description,
-    imageUrl
+    imageUrl,
   };
 
   movies.push(newMovie);
@@ -106,7 +100,8 @@ router.delete("/:id", (req: Request, res: Response) => {
     return res.sendStatus(404);
   }
 
-  movies.slice(movie.id)
+  movies.slice(movie.id);
+  defaultMovies.slice(movie.id);
 
   return res.json(movie);
 });

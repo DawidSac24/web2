@@ -1,4 +1,25 @@
-/**
+import { NewMovie } from "../types";
+
+function isNewMovie(body: unknown): body is NewMovie {
+  return (
+    !body ||
+    typeof body !== "object" ||
+    !("title" in body) ||
+    !("image" in body) ||
+    !("volume" in body) ||
+    !("price" in body) ||
+    typeof body.title !== "string" ||
+    typeof body.image !== "string" ||
+    typeof body.volume !== "number" ||
+    typeof body.price !== "number" ||
+    !body.title.trim() ||
+    !body.image.trim() ||
+    body.volume <= 0 ||
+    body.price <= 0
+  );
+}
+
+export { isNewMovie };/**
  * This file contains type guards for typescript
  * @param value
  * @returns

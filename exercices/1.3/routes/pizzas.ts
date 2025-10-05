@@ -65,7 +65,7 @@ router.get("/:id", (req, res) => {
   const pizzas = parse(jsonDbPath, defaultPizzas);
   const idInRequest = parseInt(req.params.id, 10);
   const indexOfPizzaFound = pizzas.findIndex(
-    (pizza: Pizza) => pizza.id === idInRequest
+    (pizza: Pizza) => pizza.id === idInRequest,
   );
 
   if (indexOfPizzaFound < 0) return res.sendStatus(404);
