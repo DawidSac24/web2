@@ -1,0 +1,40 @@
+### 
+
+@baseUrl = http://localhost:3000
+
+
+### 
+GET {{baseUrl}}/movies HTTP/1.1
+
+
+### 
+GET {{baseUrl}}/movies?minimum-duration=160 HTTP/1.1
+
+
+### 
+GET {{baseUrl}}/movies/1 HTTP/1.1
+
+
+### 
+POST {{baseUrl}}/movies HTTP/1.1
+Content-Type: application/json
+
+{
+  "director": "Damien Chazell",
+  "duration": "107",
+  "title": "Whiplash"
+}
+
+
+### 
+DELETE {{baseUrl}}/movies/4 HTTP/1.1
+
+
+###
+PATCH {{baseUrl}}/movies/1 HTTP/1.1
+
+Content-Type: application/json
+
+{
+  "director": "Damien Chazellida;fme"
+}
