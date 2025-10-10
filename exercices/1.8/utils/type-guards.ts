@@ -27,8 +27,36 @@ function isNewMovie(obj: any): obj is NewMovie {
   );
 }
 
+function isPartialNewMovie(obj: any): obj is Partial<NewMovie> {
+  if (!obj || typeof obj !== "object") return false;
+  const allowed = [
+    "title",
+    "director",
+    "duration",
+    "budget",
+    "description",
+    "imageUrl",
+  ];
+  for (const key of Object.keys(obj)) {
+    if (!allowed.includes(key)) return false;
+    const val = (obj as any)[key];
+    switch (key) {
+      case "title":
+      case "director":
+      case "description":
+      case "imageUrl":
+        if (typeof val !== "string" || !val.trim()) return false;
+        break;
+      case "duration":
+      case "budget":
+        if (typeof val !== "number" || val <= 0) return false;
+        break;
+    }
+  }
+  return true;
+}
 
-export { isNewMovie, isMovie }; /**
+export { isNewMovie, isMovie, isPartialNewMovie }; /**
  * This file contains type guards for typescript
  * @param value
  * @returns
