@@ -1,9 +1,7 @@
 # Boilerplate d'une RESTful API basique en TS
 
 ## Comment l'utiliser ?
-
 ### Installation
-
 - Si vous ne l'avez pas fait, vous pouvez cloner le repo associé au boilerplate pour initier votre application : `git clone https://github.com/e-vinci/basic-ts-api-boilerplate.git` ou `git clone https://github.com/e-vinci/basic-ts-api-boilerplate.git nom-de-votre-projet` pour créer votre projet nommé `nom-de-votre-projet`.
 - **package.json** est le fichier de configuration de votre projet. Veuillez le mettre à jour afin de :
   - donnez un nom à votre projet & une description ;
@@ -23,32 +21,24 @@ npm i # (equivalent de npm install)
 ```
 
 ### Exécution du programme dans un environnement de développement
-
-- Pour travailler avec un environment de développement confortable offrant un hot reload de votre application à chaque modification de script, il suffit de taper :
-
+- Pour travailler avec un environment de développement confortable offrant un hot reload de votre application à chaque modification de script, il suffit de taper : 
 ```shell
 npm run dev
 ```
-
 - N'oubliez pas d'activer la sauvegarde automatique au sein de VS Code, car c'est à chaque sauvegarde de fichier que le hot reload va s'effectuer.
 
 ### Exécution du programme dans un environnement de production
-
 - Pour déployer son application pour un environnement de production, il faut d'abord la "build" avec la commande :
-
 ```shell
 npm run tsc
 ```
-
 - Cela va générer, à partir de vos scripts `.ts`, du code JS optimisé dans le répertoire `/build` de votre application.
 - Si votre build de production est réussi, vous pouvez exécuter votre application prête pour la production à l'aide de la commande :
-
 ```shell
 npm run start
 ```
 
 ## Test des opérations offerte par l'API
-
 - Installez l'extension **REST Client** de VS Code.
 - N'oubliez pas de démarrer l'API : `npm run dev` ou utilisez votre debugger.
 - N'hésitez pas à explorer les requêtes pour voir comment l'API réagit => clic sur `Send Request` au sein de `/tests/pizzas.http` par exemple.
@@ -65,15 +55,14 @@ npm run start
 - Pour info, la configuration des règles de **ESLint** se fait dans le fichier
   **.eslintrc** devant se trouver à la racine d'un projet et offert au sein du boilerplate.
 - Il est possible de bénéficier d'un check du projet par le linter et de voir tous les avertissement ou erreurs en tapant cette commande dans votre projet :
-
 ```shell
 npm run lint
 ```
 
+
 ## Utilisation du debugger
 
 ### Utilisation de la configuration de debug offerte
-
 Nous vous offrons une configuration de Debug permettant de facilement déboguer plusieurs applications au sein d'un même folder de VS Code. Cette configuration se trouve dans le fichier **.vscode/launch.json**.  
 Cette configuration est active au sein de VS Code que si elle se trouve à la racine du folder ouverte dans VS Code. Vous devez donc vous assurer que le dossier **.vscode** et son fichier **launch.json** se trouve au bon endroit. Voici deux scénarios :
 
@@ -88,9 +77,7 @@ Si vous avez plusieurs applications au sein d'un folder de VS Code, pour débogu
 Notons que le nom de la configuration de debugging peut facilement être modifiée en changeant la valeur de l'attribut **name** dans **/.vscode/launch.json**.
 
 ### Utilisation du debugger TS
-
 Il existe un autre moyen de déboguer son application au sein de VS Code :
-
 - Veuillez installer l'extension TypeScript Debugger au sein de VS Code;
 - Ensuite, il vous suffit de créer une configuration de Debug (`Add Configuration...`, `TS Debug`) ou vous pouvez sélectionner la configuration offert nommée `ts-node`. Une fois que votre configuration est ouverte après avoir cliqué sur l'onglet de Debug, vous êtes prêt à déboguer.
 - Ouvrir le script d'entrée de votre application : `/bin/www.ts`.
@@ -103,6 +90,6 @@ Il existe un autre moyen de déboguer son application au sein de VS Code :
 - Modification du code pour l'utiliser, au sein de `/src/index.js` (ou tout autre module .js) : chargement de la librairie soit via `import` (ou `require`) du package. Généralement, les instructions d'installation et d'utilisation d'un package sont données sur le site de https://www.npmjs.com.
 - Si quelqu'un souhaite installer et exécuter ce projet, la gestion des dépendances est très simple : copie du répertoire du projet (sans `node_modules`), `npm i`, `npm run dev`. Il n'y a donc pas de librairies à gérer manuellement pour reprendre le projet d'un tiers.
 
-# Crédit :
 
+# Crédit :
 - La configuration du projet pour utiliser TS & le linter a été reprise du cours de Fullstack Open (`Typing an Express app` : https://fullstackopen.com/en/part9/typing_an_express_app ainsi que via https://github.com/fullstack-hy2020/flight-diary).

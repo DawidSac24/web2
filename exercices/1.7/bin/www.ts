@@ -89,7 +89,7 @@ function onListening() {
     typeof addr === "string"
       ? `pipe ${addr}`
       : addr && typeof addr === "object" && "port" in addr
-        ? `port ${addr.port}`
-        : "";
+      ? `port ${addr.port}`
+      : "";
   debug(`Listening on ${bind}`);
 }

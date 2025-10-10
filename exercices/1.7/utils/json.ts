@@ -39,7 +39,7 @@ function serialize(filePath: string, object: object) {
 function createPotentialLastDirectory(filePath: string) {
   const pathToLastDirectory = filePath.substring(
     0,
-    filePath.lastIndexOf(path.sep),
+    filePath.lastIndexOf(path.sep)
   );
 
   if (fs.existsSync(pathToLastDirectory)) return;
