@@ -1,0 +1,39 @@
+### 
+
+@baseUrl = http://localhost:3000
+
+
+### 
+GET {{baseUrl}}/texts HTTP/1.1
+
+
+### 
+GET {{baseUrl}}/texts?level=hard HTTP/1.1
+
+
+### 
+GET {{baseUrl}}/texts/ed08e980-a689-11f0-8364-f979dd83f226 HTTP/1.1
+
+
+### 
+POST {{baseUrl}}/texts HTTP/1.1
+Content-Type: application/json
+
+{
+  "content": "Text 4",
+  "level": "EASY"
+}
+
+
+### 
+DELETE {{baseUrl}}/texts/3 HTTP/1.1
+
+
+###
+PATCH {{baseUrl}}/texts/1 HTTP/1.1
+
+Content-Type: application/json
+
+{
+  "content": :"updated text 1"
+}
