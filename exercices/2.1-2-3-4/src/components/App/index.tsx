@@ -49,9 +49,7 @@ const App = () => {
   return (
     <div>
       <PageTitle title={pageTitle} />
-
       <Cinema name={cinema1Name} movies={moviesCinema1} />
-
       <Cinema name={cinema2Name} movies={moviesCinema2} />
     </div>
   );
