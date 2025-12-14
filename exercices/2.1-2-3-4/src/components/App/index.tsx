@@ -1,5 +1,7 @@
+import Header from "../Header";
 import PageTitle from "./PageTitle";
 import Cinema from "../Cinema";
+import Footer from "../Footer";
 
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
@@ -48,9 +50,12 @@ const App = () => {
 
   return (
     <div>
-      <PageTitle title={pageTitle} />
+      <Header>
+        <PageTitle title={pageTitle} />
+      </Header>
       <Cinema name={cinema1Name} movies={moviesCinema1} />
       <Cinema name={cinema2Name} movies={moviesCinema2} />
+      <Footer></Footer>
     </div>
   );
 };
